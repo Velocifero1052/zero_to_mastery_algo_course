@@ -1,103 +1,12 @@
+
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <unordered_set>
-#include <climits>
-#include <algorithm>
-#include <cctype>
 
 #include "pretty_print.h"
+#include "chapters/arrays.h"
 
 using namespace std;
-
-vector<int> twoSum(vector<int>& nums, int target) {
-  unordered_map<int, int> found;
-
-  for (int i = 0; i < nums.size(); i++) {
-    int complement = target - nums[i];
-    if (found.count(complement) > 0) {
-      return {i, found[complement]};
-    }
-    found[nums[i]] = i;
-
-  }
-
-  return {};
-}
-
-int maxSubArray(const vector<int>& nums) {
-  int max_so_far = INT_MIN;
-  int current_max = 0;
-
-  for (int num: nums) {
-    current_max = max(num, current_max + num);
-    max_so_far = max(max_so_far, current_max);
-  }
-
-  return max_so_far;
-}
-
-void moveZeroes(vector<int>& nums) {
-  if (nums.size() <= 1)
-    return;
-  int last_not_zero = 0;
-  for (int i = 0; i < nums.size(); i++) {
-    if (nums[i] != 0) {
-      swap(nums[last_not_zero], nums[i]);
-      last_not_zero++;
-    }
-  }
-}
-
-bool containsDuplicate(vector<int>& nums) {
-  unordered_set<int> uset;
-
-  for (auto num: nums) {
-    if (!uset.insert(num).second){
-      return true;
-    }
-
-  }
-  return false;
-}
-
-void rotateArray(vector<int>& nums, int k) {
-
-  int n = (int)nums.size();
-
-  k = k % n;
-  k = n - k;
-
-  reverse(nums.begin() + k, nums.end());
-  reverse(nums.begin(), nums.begin() + k);
-  reverse(nums.begin(), nums.end());
-}
-
-string longest_word(string sen) {
-
-  auto longest_word_start = sen.begin();
-  int max = 0;
-
-  for (auto it = sen.begin(); it != sen.end(); it++) {
-    if (!ispunct(*it) && *it != ' ') {
-      int current_max = 0;
-      for (auto curr_it = it; curr_it != sen.end(); curr_it++) {
-        if (!ispunct(*curr_it) && *curr_it != ' ') {
-          current_max++;
-        } else {
-          break;
-        }
-      }
-      if (current_max > max) {
-        longest_word_start = it;
-        max = current_max;
-      }
-    }
-  }
-
-  // code goes here
-  return {longest_word_start, longest_word_start + max};
-}
 
 
 int main() {
@@ -147,6 +56,8 @@ int main() {
   cout << "################################################################" << endl;
   cout << "###########################Hash Tables##########################" << endl;
   cout << "################################################################" << endl;
+
+
 
 
   return 0;
